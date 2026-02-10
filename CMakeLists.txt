@@ -1469,7 +1469,8 @@ if(LIBTYPE STREQUAL "STATIC")
     target_include_directories(${IMPL_TARGET} PRIVATE ${OpenAL_SOURCE_DIR}/gsl/include)
     target_link_libraries(${IMPL_TARGET} PRIVATE ${LINKER_FLAGS} ${EXTRA_LIBS} ${MATH_LIB}
         $<BUILD_LOCAL_INTERFACE:alsoft::fmt>)
-
+    set_property(TARGET ${IMPL_TARGET} PROPERTY
+            MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
     if(WIN32)
         # This option is for static linking OpenAL Soft into another project
         # that already defines the IDs. It is up to that project to ensure all
