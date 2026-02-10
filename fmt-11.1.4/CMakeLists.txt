@@ -51,7 +51,8 @@ function(add_module_library name)
 
   add_library(${name} OBJECT)
   set_target_properties(${name} PROPERTIES LINKER_LANGUAGE CXX)
-
+  set_property(TARGET ${name} PROPERTY
+          MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
   if (NOT ${${AML_IF}})
     # Create a non-modular library.
     target_sources(${name} PRIVATE ${AML_FALLBACK})
